@@ -1,26 +1,403 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Ledgerly Account Deletion</title>
-</head>
-<body>
-  <h1>Request Account Deletion</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <p>
-    To request deletion of your Ledgerly account and associated data,
-    please email:
-  </p>
+    <title>Ledgerly Account Deletion</title>
+    <meta
+      name="description"
+      content="Request deletion of your Ledgerly account and associated data."
+    />
 
-  <p><b>legerlysupport@gmail.com</b></p>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-  <p>
-    Include the email address associated with your Ledgerly account in your request.
-  </p>
+      :root {
+        --bg: #0f1216;
+        --bg-soft: #171b21;
+        --card: rgba(255, 255, 255, 0.06);
+        --card-strong: rgba(255, 255, 255, 0.09);
+        --border: rgba(255, 255, 255, 0.12);
+        --border-soft: rgba(255, 255, 255, 0.08);
+        --text: rgba(255, 255, 255, 0.94);
+        --muted: rgba(255, 255, 255, 0.66);
+        --faint: rgba(255, 255, 255, 0.46);
+        --accent: #f2b8a2;
+        --accent-soft: rgba(242, 184, 162, 0.14);
+        --danger: #f0a36a;
+        --green: #7fd8a4;
+        --shadow: rgba(0, 0, 0, 0.42);
+      }
 
-  <p>
-    Account and associated personal data will be deleted within 30 days,
-    unless retention is required for legal or security purposes.
-  </p>
-</body>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top left, rgba(242, 184, 162, 0.18), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(127, 216, 164, 0.08), transparent 30%),
+          linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 48%, #090b0e 100%);
+        color: var(--text);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.65;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent 72%);
+      }
+
+      .page {
+        width: min(100%, 920px);
+        margin: 0 auto;
+        padding: 34px 20px 56px;
+        position: relative;
+      }
+
+      .hero {
+        padding: 34px 26px;
+        border-radius: 34px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.045)),
+          rgba(15, 18, 22, 0.92);
+        border: 1px solid var(--border);
+        box-shadow: 0 28px 90px var(--shadow);
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        right: -130px;
+        top: -120px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(242, 184, 162, 0.22), transparent 68%);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(242, 184, 162, 0.22);
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 750;
+        letter-spacing: 0.02em;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 24px rgba(242, 184, 162, 0.7);
+      }
+
+      h1 {
+        margin: 22px 0 10px;
+        font-size: clamp(38px, 7vw, 68px);
+        line-height: 0.95;
+        letter-spacing: -0.075em;
+        position: relative;
+        z-index: 1;
+      }
+
+      .updated {
+        margin: 0;
+        color: var(--faint);
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro {
+        max-width: 740px;
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .content {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      section {
+        padding: 24px;
+        border-radius: 28px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.035)),
+          rgba(15, 18, 22, 0.88);
+        border: 1px solid var(--border-soft);
+        box-shadow: 0 16px 46px rgba(0, 0, 0, 0.24);
+        backdrop-filter: blur(16px);
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        line-height: 1.2;
+        letter-spacing: -0.035em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      p + p {
+        margin-top: 12px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 0;
+        padding-left: 22px;
+        color: var(--muted);
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      strong {
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 750;
+      }
+
+      .request-card {
+        margin-top: 16px;
+        padding: 18px;
+        border-radius: 22px;
+        background: var(--card-strong);
+        border: 1px solid var(--border);
+      }
+
+      .email-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 14px;
+        padding: 15px 18px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #101114;
+        text-decoration: none;
+        font-weight: 850;
+        box-shadow: 0 18px 40px rgba(242, 184, 162, 0.18);
+      }
+
+      .note {
+        margin-top: 14px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(242, 163, 106, 0.1);
+        border: 1px solid rgba(242, 163, 106, 0.2);
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 14px;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .pill {
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.055);
+        border: 1px solid var(--border-soft);
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .footer {
+        margin-top: 22px;
+        padding: 18px 4px 0;
+        color: var(--faint);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          padding: 20px 14px 42px;
+        }
+
+        .hero {
+          padding: 28px 20px;
+          border-radius: 28px;
+        }
+
+        section {
+          padding: 20px;
+          border-radius: 24px;
+        }
+
+        .email-button {
+          display: flex;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          Ledgerly
+        </div>
+
+        <h1>Account Deletion</h1>
+
+        <p class="updated">Last Updated: June 25, 2026</p>
+
+        <p class="intro">
+          You can request deletion of your Ledgerly account and associated data at any time.
+          This page explains how to submit a deletion request, what data is deleted, and what
+          may be retained when required for legal, security, or operational reasons.
+        </p>
+      </header>
+
+      <div class="content">
+        <section>
+          <h2>How to Request Account Deletion</h2>
+
+          <p>
+            To request deletion of your Ledgerly account and associated data, please email us
+            from the email address linked to your Ledgerly account.
+          </p>
+
+          <div class="request-card">
+            <strong>Email:</strong>
+            <br />
+            <a
+              class="email-button"
+              href="mailto:ledgerlysupport@gmail.com?subject=Delete%20my%20Ledgerly%20account&body=Hello%20Ledgerly%20Support%2C%0A%0AI%20would%20like%20to%20request%20deletion%20of%20my%20Ledgerly%20account%20and%20associated%20data.%0A%0AAccount%20email%3A%20%0A%0AThank%20you."
+            >
+              ledgerlysupport@gmail.com
+            </a>
+          </div>
+
+          <p class="note">
+            Please include the email address associated with your Ledgerly account in your
+            request. We may ask for additional information if needed to verify account ownership.
+          </p>
+        </section>
+
+        <section>
+          <h2>What Data Will Be Deleted</h2>
+
+          <p>
+            When your account deletion request is verified, we will delete or anonymize account
+            data associated with your Ledgerly account, including:
+          </p>
+
+          <ul>
+            <li>Account profile information, such as your name and email address.</li>
+            <li>Expense records you created in Ledgerly.</li>
+            <li>Personal spending records and categories.</li>
+            <li>Shared group data connected to your account where deletion is technically possible.</li>
+            <li>Balances, settlements, notes, and recurring expense records linked to your account.</li>
+            <li>Cloud-synced data associated with your Ledgerly account.</li>
+          </ul>
+
+          <div class="pill-row">
+            <span class="pill">Account data</span>
+            <span class="pill">Expenses</span>
+            <span class="pill">Groups</span>
+            <span class="pill">Balances</span>
+            <span class="pill">Recurring expenses</span>
+          </div>
+        </section>
+
+        <section>
+          <h2>Data That May Be Retained</h2>
+
+          <p>
+            Some information may be retained when necessary for legal, security, fraud prevention,
+            dispute resolution, backup recovery, or legitimate operational purposes.
+          </p>
+
+          <p>
+            We may also retain anonymized or aggregated data that can no longer reasonably identify
+            you. Support emails related to your deletion request may be retained as a record of the
+            request.
+          </p>
+        </section>
+
+        <section>
+          <h2>Processing Time</h2>
+
+          <p>
+            Account and associated personal data will be deleted or anonymized within
+            <strong>30 days</strong> after we verify your request, unless longer retention is
+            required for legal, security, fraud prevention, or legitimate operational reasons.
+          </p>
+        </section>
+
+        <section>
+          <h2>Local Device Data</h2>
+
+          <p>
+            Some Ledgerly data may be stored locally on your device. You can remove local app data
+            by deleting the Ledgerly app from your device or clearing the app’s storage from your
+            device settings.
+          </p>
+        </section>
+
+        <section>
+          <h2>Need Help?</h2>
+
+          <p>
+            For questions about account deletion, data deletion, or privacy, contact us at:
+          </p>
+
+          <div class="request-card">
+            <strong>Email:</strong>
+            <br />
+            <a class="email-button" href="mailto:ledgerlysupport@gmail.com">
+              ledgerlysupport@gmail.com
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        © 2026 Ledgerly. All rights reserved.
+      </footer>
+    </main>
+  </body>
 </html>
